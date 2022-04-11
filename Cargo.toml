@@ -1,8 +1,26 @@
 [package]
-name = "MarkItDown"
+name = "mark_it_down"
 version = "0.1.0"
 edition = "2021"
+default-run="mark_it_down_bin"
+authors=["Phil Lui <phillui37@gmail.com>"]
+
+[[bin]]
+name="mark_it_down_bin"
+path="src/main.rs"
+
+[lib]
+crate-type=["cdylib", "rlib"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+eframe="0.17.0"
+serde={version="1",features=["derive"],optional=true}
+
+[features]
+default=[]
+persistence=["eframe/persistence","serde"] # enable for app state persistance
+
+[profile.release]
+opt-level=2
