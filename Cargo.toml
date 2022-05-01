@@ -1,27 +1,28 @@
 [package]
-name = "mark_it_down"
-version = "0.1.0"
+authors = ["Phil Lui <phillui37@gmail.com>"]
+default-run = "mark_it_down_bin"
 edition = "2021"
-default-run="mark_it_down_bin"
-authors=["Phil Lui <phillui37@gmail.com>"]
 license = "BSD-3-Clause"
+name = "mark_it_down"
+rust-version = "1.60"
+version = "0.1.0"
 
 [[bin]]
-name="mark_it_down_bin"
-path="src/main.rs"
+name = "mark_it_down_bin"
+path = "src/main.rs"
 
 [lib]
-crate-type=["cdylib", "rlib"]
+crate-type = ["cdylib", "rlib"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-eframe="0.18.0"
-serde={version="1",features=["derive"],optional=true}
+eframe = {version = "0.18.0", features = ["persistence"]}
+egui = "0.18.0"
+serde = {version = "1", features = ["derive"]}
 
-[features]
-default=[]
-persistence=["eframe/persistence","serde"] # enable for app state persistance
+[target.'cfg(not(target_arch="wasm32"))'.dependencies]
+tracing-subscriber = "0.3"
 
 [profile.release]
-opt-level=2
+opt-level = 2
